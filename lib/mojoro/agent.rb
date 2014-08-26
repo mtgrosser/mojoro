@@ -16,7 +16,7 @@ module Mojoro
     end
     
     def initialize(url, site_id, options = {})
-      @url = url #URI.parse(url)
+      @url = url
       @site_id = site_id
       @options = options
     end
@@ -35,7 +35,7 @@ module Mojoro
           
     def submit!(message)
       action = Action.new(ActiveSupport::JSON.decode(message))
-      http = EventMachine::HttpRequest.new(url).post(body: action.body(site_id))
+      EventMachine::HttpRequest.new(url).post(body: action.body(site_id))
 =begin      
       puts url
       puts action.body(site_id)
