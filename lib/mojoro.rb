@@ -1,0 +1,11 @@
+require 'rails'
+require 'active_support'
+require 'active_support/core_ext/object/json'
+require 'redis'
+
+require 'mojoro/version'
+require 'mojoro/config'
+require 'mojoro/action'
+require 'mojoro/metrics'
+require 'mojoro/middleware'
+require 'mojoro/railtie'

@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'mojoro'
+require 'mojoro/agent'
+
+require 'dante'
+
+runner = Dante::Runner.new('mojoro')
+runner.description = 'Mojoro analytics agent'
+
+runner.with_options do |opts|
+  opts.on("-r", "--redis URL", String, "Redis URL") do |redis|
+    options[:redis] = redis
+  end
+  opts.on("-n", "--namespace STRING", String, "Redis namespace") do |namespace|
+    options[:namespace] = namespace
+  end
+end
+
+runner.execute do |opts|
+	if opts[:redis]
+		# TODO: parse URL, instantiate redis
+	end
+	Mojoro.namespace = opts[:namespace] if opts[:namespace]
+	Mojoro::Agent.run
+end
