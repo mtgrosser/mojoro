@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'em-http-request'
   s.add_runtime_dependency 'em-hiredis'
   s.add_runtime_dependency 'redis', '~> 3.1', '>= 3.1.0'
-  s.add_runtime_dependency 'railties', '~> 4.1', '>= 4.1.0'
   s.add_runtime_dependency 'dante', '~> 0'
 
+  s.add_development_dependency 'railties', '~> 4.1', '>= 4.1.0'
   s.add_development_dependency 'byebug', '~> 0'
   s.add_development_dependency 'simplecov', '~> 0'
   s.add_development_dependency 'rake', '~> 0.8', '>= 0.8.7'

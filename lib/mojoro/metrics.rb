@@ -1,3 +1,7 @@
+require 'rails'
+require 'mojoro/middleware'
+require 'mojoro/instrumentation'
+
 module Mojoro
   module Metrics
     class << self
@@ -12,8 +16,8 @@ module Mojoro
       end
       
       def collect_active_record(data, runtime)
-        return if 'CACHE' == data[:type]
-        action.sql << [data[:type] || 'Other SQL', runtime, ''] #data[:sql]]
+        return if 'CACHE' == data[:name]
+        action.sql << [data[:name] || 'Other SQL', runtime, data[:sql]]
       end
 
       def report
@@ -39,6 +43,7 @@ module Mojoro
       
       def publish!
         return if !Thread.current[:mojoro] || action.blank?
+        return if action.total < Mojoro.transaction_trace_threshold
         redis.publish Mojoro.channel, action.to_json
       rescue Redis::BaseError
         #

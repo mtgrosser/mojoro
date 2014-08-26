@@ -1,4 +1,5 @@
 module Mojoro
+  PRECISION = 2
   
   # Redis connection (optional)
   mattr_accessor :redis
@@ -6,20 +7,14 @@ module Mojoro
   # Optional redis namespace
   mattr_accessor :namespace
   
+  # All transactions exceeding this limit will be traced (default: 100 ms)
+  mattr_accessor :transaction_trace_threshold
+  self.transaction_trace_threshold = 100
+  
   class << self
     def channel
       return @channel if @channel
       @channel = [namespace, 'mojoro'].compact.join(':')
-    end
-    
-    def enable!
-      ActiveSupport::Notifications.subscribe('process_action.action_controller') do |name, started, finished, unique_id, data|
-        Mojoro::Metrics.collect_action_controller(data, (finished - started) * 1000)
-      end
-
-      ActiveSupport::Notifications.subscribe('sql.active_record') do |name, started, finished, unique_id, data|
-        Mojoro::Metrics.collect_active_record(data, (finished - started) * 1000)
-      end
     end
   end
 end

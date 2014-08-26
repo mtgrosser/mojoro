@@ -1,7 +1,10 @@
 require 'eventmachine'
 require 'em-http-request'
 require 'em-hiredis'
-require 'byebug'
+
+require 'mojoro/trace'
+
+require 'pp'
 
 module Mojoro
   class Agent
@@ -34,8 +37,9 @@ module Mojoro
     private
           
     def submit!(message)
-      action = Action.new(ActiveSupport::JSON.decode(message))
-      EventMachine::HttpRequest.new(url).post(body: action.body(site_id))
+      trace = Trace.new(ActiveSupport::JSON.decode(message))
+      pp trace.as_json
+      EventMachine::HttpRequest.new(url).post(body: trace.body(site_id))
 =begin      
       puts url
       puts action.body(site_id)
