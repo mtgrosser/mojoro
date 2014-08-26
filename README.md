@@ -8,10 +8,11 @@ Rails application performance monitoring
 
 ## In your application
 
+```ruby
     # config/initializers/mojoro.rb
     require 'mojoro/metrics'
     Mojoro.enable!
-    
+```   
 ### Configuration options
 
 You can set the following options in your initializer:
