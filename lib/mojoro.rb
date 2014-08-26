@@ -1,3 +1,5 @@
+require 'uri'
+require 'net/http'
 require 'rails'
 require 'active_support'
 require 'active_support/core_ext/object/json'

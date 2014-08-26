@@ -16,6 +16,9 @@ Gem::Specification.new do |s|
   s.summary = 'Rails app performance monitoring'
   s.license = 'MIT'
   
+  s.add_runtime_dependency 'eventmachine'
+  s.add_runtime_dependency 'em-http-request'
+  s.add_runtime_dependency 'em-hiredis'
   s.add_runtime_dependency 'redis', '~> 3.1', '>= 3.1.0'
   s.add_runtime_dependency 'railties', '~> 4.1', '>= 4.1.0'
   s.add_runtime_dependency 'dante', '~> 0'

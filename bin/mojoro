@@ -9,6 +9,12 @@ runner = Dante::Runner.new('mojoro')
 runner.description = 'Mojoro analytics agent'
 
 runner.with_options do |opts|
+  opts.on('-a', '--analytics URL', String, 'Analytics URL') do |analytics|
+    options[:analytics] = analytics
+  end
+  opts.on('-s', '--site ID', String, 'Site ID') do |site_id|
+    options[:site_id] = site_id
+  end
   opts.on("-r", "--redis URL", String, "Redis URL") do |redis|
     options[:redis] = redis
   end
@@ -22,5 +28,5 @@ runner.execute do |opts|
 		# TODO: parse URL, instantiate redis
 	end
 	Mojoro.namespace = opts[:namespace] if opts[:namespace]
-	Mojoro::Agent.run
+	Mojoro::Agent.run(opts[:analytics], opts[:site_id])
 end
