@@ -34,10 +34,10 @@ runner.verify_options_hook = lambda do |opts|
 end
 
 runner.execute do |opts|
-	if opts[:redis]
-		# TODO: parse URL, instantiate redis
-	end
-	Mojoro.namespace = opts[:namespace] if opts[:namespace]
+  if opts[:redis]
+    # TODO: parse URL, instantiate redis
+  end
+  Mojoro.namespace = opts[:namespace] if opts[:namespace]
   puts "Using analytics target #{opts[:analytics]} with site ID #{opts[:site_id]}"
-	Mojoro::Agent.run(opts[:analytics], opts[:site_id])
+  Mojoro::Agent.run(opts[:analytics], opts[:site_id])
 end
