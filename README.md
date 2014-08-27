@@ -37,7 +37,7 @@ The Morojo agent is responsible for relaying all collected performance data to y
 
 ```bash
 # Starting the agent
-$ bundle exec mojoro -a http://analytics.example.com/piwik,php -s 3 --n some_optional_namespace -d -l log/mojoro.log -P tmp/pids/mojoro.pid
+$ bundle exec mojoro -a http://analytics.example.com/piwik,php -s 3 -n some_optional_namespace -d -l log/mojoro.log -P tmp/pids/mojoro.pid
 
 # Stopping it
 $ bundle exec mojoro -k -P tmp/pids/mojoro.pid
