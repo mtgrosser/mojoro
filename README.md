@@ -35,7 +35,7 @@ Mojoro.transaction_trace_threshold = 200
 
 The Morojo agent is responsible for relaying all collected performance data to your analytics app.
 
-```shell
+```bash
 # Starting the agent
 $ bundle exec mojoro -a http://analytics.example.com/piwik,php -s 3 --n some_optional_namespace -d -l log/mojoro.log -P tmp/pids/mojoro.pid
 
