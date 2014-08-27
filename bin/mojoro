@@ -17,7 +17,7 @@ runner.with_options do |opts|
   opts.on('-a', '--analytics URL', String, 'Analytics URL') do |analytics|
     options[:analytics] = analytics
   end
-  opts.on('-s', '--site ID', String, 'Site ID') do |site_id|
+  opts.on('-s', '--site ID', Integer, 'Site ID') do |site_id|
     options[:site_id] = site_id
   end
   opts.on('-r', '--redis URL', String, 'Redis URL') do |redis|
@@ -30,7 +30,7 @@ end
 
 runner.verify_options_hook = lambda do |opts|
   exit_with_error 'Analytics URL must be given using -a' if opts[:analytics].blank?
-  exit_with_error 'Site ID must be given using -s' if opts[:site_id].blank?
+  exit_with_error 'Site ID must be given using -s' if !opts[:site_id] || opts[:site_id] < 1
 end
 
 runner.execute do |opts|

@@ -36,7 +36,10 @@ module Mojoro
           
     def submit!(message)
       trace = Trace.new(ActiveSupport::JSON.decode(message))
-      EventMachine::HttpRequest.new(url).post(body: trace.body(site_id))
+      puts "SUBMIT TO #{site_id.inspect}"
+      body = trace.body(site_id)
+      puts body
+      EventMachine::HttpRequest.new(url).post(body: body)
 =begin      
       puts url
       puts action.body(site_id)

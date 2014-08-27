@@ -15,13 +15,13 @@ module Mojoro
       sql.each do |db_name, db_total, db_count, db_runtime, db_sql|
         req << encode(defaults.merge(action_name: "#{name}/SQL/#{db_name}", gt_ms: db_total))
       end
-      { requests: req }.to_json
+      { requests: req }.to_json #.gsub('\u0026', '&')
     end
     
     private
     
     def encode(params)
-      params.inject('?') { |str, key_value| str.concat("#{URI.escape(key_value[0].to_s)}=#{URI.escape(key_value[1].to_s)}&") }
+      '?' + params.to_param
     end
       
   end

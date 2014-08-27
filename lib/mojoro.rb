@@ -1,7 +1,7 @@
 require 'uri'
 require 'net/http'
 require 'active_support'
-require 'active_support/core_ext/object/json'
+require 'active_support/all'
 require 'redis'
 
 require 'mojoro/version'
