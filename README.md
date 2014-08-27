@@ -27,7 +27,7 @@ Mojoro.namespace = 'some_optional_namespace'
 # If you don't want to use the default Redis connection, you can initialize it here
 Mojoro.redis = Redis.new(:url => 'redis://:p4ssw0rd@10.0.1.1:6380/15')
     
-# If duration exceeds this threshold in milliseconds, record transaction trace
+# If action duration exceeds this threshold in milliseconds, trace it
 Mojoro.transaction_trace_threshold = 200
 ```
 
