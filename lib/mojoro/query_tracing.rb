@@ -22,16 +22,16 @@ module Mojoro
   class QueryTracer
     
     def <<(ary)
-      type, runtime, sql = ary
-      if trace = traces[type]
+      name, runtime, sql = ary
+      if trace = traces[name]
         trace.update(runtime, sql)
       else
-        traces[type] = QueryTrace.new(runtime, sql)
+        traces[name] = QueryTrace.new(runtime, sql)
       end
     end
     
     def as_json(*)
-      traces.map { |type, trace| [type, trace.total_runtime.round(PRECISION), trace.count, trace.runtime.round(PRECISION), trace.sql] }
+      traces.map { |name, trace| [name, trace.total_runtime.round(PRECISION), trace.count, trace.runtime.round(PRECISION), trace.sql] }
     end
     
     private

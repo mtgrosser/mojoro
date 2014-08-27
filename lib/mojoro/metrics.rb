@@ -42,11 +42,10 @@ module Mojoro
       end
       
       def publish!
-        return if !Thread.current[:mojoro] || action.blank?
-        return if action.total < Mojoro.transaction_trace_threshold
+        return if !Thread.current[:mojoro] || action.blank? || action.total < Mojoro.transaction_trace_threshold
         redis.publish Mojoro.channel, action.to_json
-      rescue Redis::BaseError
-        #
+      rescue Redis::BaseError => e
+        puts "REDIS ERROR! #{e}"
       end
       
     end

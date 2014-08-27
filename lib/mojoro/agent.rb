@@ -4,8 +4,6 @@ require 'em-hiredis'
 
 require 'mojoro/trace'
 
-require 'pp'
-
 module Mojoro
   class Agent
     private_class_method :new
@@ -38,7 +36,6 @@ module Mojoro
           
     def submit!(message)
       trace = Trace.new(ActiveSupport::JSON.decode(message))
-      pp trace.as_json
       EventMachine::HttpRequest.new(url).post(body: trace.body(site_id))
 =begin      
       puts url
